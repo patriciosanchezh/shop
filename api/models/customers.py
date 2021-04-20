@@ -23,7 +23,7 @@ class Customer(db.Model):
     
     created = db.Column(db.DateTime, server_default=db.func.now())
     
-    creater_user_id = db.Column(db.Integer, 
+    creator_user_id = db.Column(db.Integer, 
                              db.ForeignKey('users.id'), 
                              nullable=False)
     
@@ -32,12 +32,12 @@ class Customer(db.Model):
                                    nullable=False)
                             
     
-    def __init__(self, name, surname, email, creater_user_id, last_modifier_user_id, photo = None):
+    def __init__(self, name, surname, email, creator_user_id, last_modifier_user_id, photo = None):
         self.name = name
         self.surname = surname
         self.photo = photo
         self.email = email
-        self.creater_user_id = creater_user_id
+        self.creator_user_id = creator_user_id
         self.last_modifier_user_id  = last_modifier_user_id
         
     def create(self):
@@ -58,6 +58,6 @@ class CustomerSchema(ma.SQLAlchemySchema):
     surname = fields.String(required=True)
     photo = fields.String(required=False)
     email = fields.String(required=True)
-    creater_user_id = fields.Number(required=False)
+    creator_user_id = fields.Number(required=False)
     last_modifier_user_id = fields.Number(required=False)
     

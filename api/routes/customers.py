@@ -24,7 +24,7 @@ def create_customer():
     try:
         data = request.get_json()
         customer_schema = CustomerSchema()
-        data["creater_user_id"] = get_jwt_identity()
+        data["creator_user_id"] = get_jwt_identity()
         data["last_modifier_user_id"] = get_jwt_identity()
         customer = customer_schema.load(data)
         result = customer_schema.dump(customer.create())
@@ -44,9 +44,9 @@ def upsert_customer_avatar(customer_id):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             extension = filename.split(".")[-1]
-            filename = str(get_customer.id) + "." + extension #saves photo with customer.id plus original extension
+            filename = str(get_customer.id) + "." + extension       #saves photo with customer.id plus original extension
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
-            if get_customer.photo: #remove old photo if it exists
+            if get_customer.photo:           #remove old photo if it exists
                 old_photo = get_customer.photo.split("/")[-1]
                 os.remove(os.path.join(current_app.config['UPLOAD_FOLDER'], old_photo))
                 
@@ -66,7 +66,9 @@ def upsert_customer_avatar(customer_id):
 @jwt_required()
 def get_customer_list():
     get_customers = Customer.query.all()
-    customer_schema = CustomerSchema(many=True)
+    customer_schema = CustomerSchema(many=True,  only=['id','name', 'surname', 'email',\
+                                                       'last_modifier_user_id',\
+                                                       'creator_user_id'])
     customers = customer_schema.dump(get_customers)
     return response_with(resp.SUCCESS_200, value={"customers": customers})
 
@@ -91,7 +93,9 @@ def update_customer(customer_id):
         get_customer.last_modifier_user_id = get_jwt_identity()
         db.session.add(get_customer)
         db.session.commit()
-        customer_schema = CustomerSchema()
+        customer_schema = CustomerSchema(only=['id','name', 'surname', 'email',\
+                                                       'last_modifier_user_id',\
+                                                       'creator_user_id'])
         customer = customer_schema.dump(get_customer)
         return response_with(resp.SUCCESS_200, value={"customer": customer})
     except Exception as e:

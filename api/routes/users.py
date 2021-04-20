@@ -151,7 +151,7 @@ def create_root():
 @access_required('admin') 
 def get_user_list():
     get_users = User.query.all()
-    user_schema = UserSchema(many=True, only=["id", 'username', 'email', 'role'])
+    user_schema = UserSchema(many=True, only=['id', 'username', 'email', 'role'])
     users = user_schema.dump(get_users)
     return response_with(resp.SUCCESS_200, value={"users": users})
 
@@ -173,7 +173,7 @@ def update_user(user_id):
         get_user = User.query.get_or_404(user_id)
         current_user = User.query.get(get_jwt_identity())
         
-        if get_user.username == 'root' and current_user.role != 'root': 
+        if ('root' in data) and current_user.role != 'root': 
             return jsonify(msg="You cannot make a root!"), 403 
         
         for field in data:           #modify only the attributes asked
@@ -217,3 +217,27 @@ def delete_user(user_id):
     db.session.commit()
     return response_with(resp.SUCCESS_204)
 
+@user_routes.route('status/<int:user_id>', methods=['POST'])
+@access_required('admin') 
+def change_status_user(user_id):
+    try:
+        data = request.get_json()
+        get_user = User.query.get_or_404(user_id)
+        
+        current_user = User.query.get(get_jwt_identity())
+    
+        if data["role"] not in ACCESS.keys():      #check if it's a valid role 
+            return jsonify(msg="{} is not a valid role!".format(get_user.role)), 403
+        
+        if data["role"] == 'root' and current_user.role != 'root': 
+            return jsonify(msg="You cannot make a root!"), 403 
+        
+        get_user.username == data["role"]
+        
+        db.session.delete(get_user)
+        db.session.commit()
+        return response_with(resp.SUCCESS_200)
+    
+    except Exception as e:
+        print(e)
+        return response_with(resp.INVALID_INPUT_422)
