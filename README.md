@@ -301,7 +301,7 @@ RESPONSE
 
 ```
 
-*NOTE: If you do not want to deal with emails, you can comment several lines in the functions authenticate_user, create_user and update_user in api/routes/users.py. The exact lines are indicated.
+*IMPORTANT NOTE: If you do not want to deal with emails, you can comment several lines in the functions authenticate_user, create_user and update_user in api/routes/users.py. The exact lines are indicated.
 
 
 
@@ -375,6 +375,8 @@ PUT http://127.0.0.1:5000/api/users/2
 
 ```
 
+
+
 RESPONSE
 
 ```json
@@ -421,7 +423,88 @@ DELETE http://127.0.0.1:5000/api/users/2
 ### Customers endpoint
 
 
+NOTE: We omit the header with the authorization in the following but it's necessary. 
+
+* Create customer
+
+
+POST http://127.0.0.1:5000/api/customers/
+
+REQUEST
+
+
+```json{
+
+{
+    "name": "Roger",
+    "surname": "Waters",
+    "email": "waters@gmail.com"
+
+}
+
+
+}
+
+```
+
+
+RESPONSE
+```json
+{
+    "code": "success",
+    "customer": {
+        "creator_user_id": 1.0,
+        "email": "waters@gmail.com",
+        "id": 1.0,
+        "last_modifier_user_id": 1.0,
+        "name": "Roger",
+        "photo": null,
+        "surname": "Waters"
+    }
+}
+
+```
+
+*Upload photo
+
+POST http://127.0.0.1:5000/api/customers/photo/1
+
+REQUEST
+*Use content_type='multipart/form-data' and export the choose file: waters.jpg
+
+
+RESPONSE
+```json
+{
+    "code": "success",
+    "customer": {
+        "creator_user_id": 1.0,
+        "email": "waters@gmail.com",
+        "id": 1.0,
+        "last_modifier_user_id": 1.0,
+        "name": "Roger",
+        "photo": "http://127.0.0.1:5000/photo/1.jpg",
+        "surname": "Waters"
+    }
+}
+
+
+Each time you upload a new photo, the old one is deleted. The number after photo/ corresponds to customer.id.
+
+```
+
+
+
+
+
 ## Run the tests ##
+
+
+
+
+
+
+* Recall rename the directory shop to src.
 
 *In order to run the tests for users
 
@@ -430,6 +513,7 @@ DELETE http://127.0.0.1:5000/api/users/2
 ```
 
 It will be run 17 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_users.py to get more details. 
+
 
 
 
