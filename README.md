@@ -244,8 +244,10 @@ This access_token will be used to login in.
 For the rest endpoints in customers you need to login in and for the endpoinst in users, you also need the user's role has to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modify and add more users with different authorizations. 
 
 
-
+* Create user
 REQUEST
+
+
 ```json{
 Header {Authorization: 
 
@@ -256,7 +258,7 @@ Barear eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODk5
 }
 ```
 
-* Create user
+
 
 ```json
 
@@ -271,7 +273,7 @@ Barear eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODk5
 
 ```
 
-We omit the header in the following  but it's necessary. 
+We omit the header in the following but it's necessary. 
 
 If it's a valid email you will get:
 
@@ -282,6 +284,7 @@ RESPONSE
     "code": "success"
 }
 
+```
 
 Open the link in the email and see:
 
@@ -296,6 +299,8 @@ If you do not want to deal with emails, you can comment several lines in the fun
 
 
 If the token expired:
+
+
 RESPONSE
 ```json
 {
