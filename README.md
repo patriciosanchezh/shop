@@ -128,8 +128,7 @@ src
 
 
 
-
-## Running
+## Run app ##
 
 * Before Running enter to src.
 	
@@ -138,8 +137,9 @@ src
     ```
 
 * It must looks like this
+
     ```
-    (venv) flask-rest-api/src $
+   	 (venv) flask-rest-api/src $
     ```
 
 * Now before run, we have to make a changes in src/api/conifg/conifg.py in the class class DevelopmentConfig. In order to send the email for Auth 2 protocol for authentication, use your own credentials for this fields:
@@ -153,16 +153,18 @@ src
     MAIL_USE_TLS= False
     MAIL_USE_SSL= True 
     ```
-All this info you can find in your email, configurations. Some servers require a previous configuration in its site. By example, I used a scholar email server. 
+*All this info you can find in your email, configurations. Some servers require a previous configuration in its site. By example, I used a scholar email server. 
 
-
+* Now you are ready to run it.
 
     On your terminal, run the server using this one simple command:
+
     ```
     (venv) flask-rest-api/src $ pyhon run.py
     ```
 
     You can now access the app on your local browser by using
+
     ```
     http://localhost:5000/api/
     ```
