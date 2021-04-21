@@ -9,14 +9,10 @@ A user can:• List all customers in the database.• Get full customer inform
 Any of the last functions require the user to be logged in.
 
 An admin can also:• Create users. Users have the fields id, username (unique), email (unique), password,
- 		role and isVerified (which indicates if the user has a confirmation via 		email). All of them are required. By default, role = user and isVerified = 		False. In order to valid the authentication, an email is sent to verify 		the identity. • Delete users.• Update users.• List users.• Change admin status. 
+ 		role and isVerified (which indicates if the user has a confirmation via 		email). All of them are required. By default, role = user and isVerified = 		False. In order to valid the authentication, an email is sent to verify 		the identity. • Delete users.• Update users.• List all users.• Change admin status. 
 
 
 
-
-Main libraries used:
-1. Flask - API design and working with third party APIs
-2. Flask-SQLAlchemy - adds support for SQLAlchemy ORM.
 
 
 ## Prerequisites
@@ -125,7 +121,7 @@ src
 ```
 
 
-The endpoints are defined in routes. The models for the database are in models. 
+The endpoints are defined in routes. The models which defined users and customers for the database are in models. 
 
 
 ## Run app ##
