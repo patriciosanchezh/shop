@@ -37,15 +37,20 @@ def create_user():
         
         if user.role == 'root' and current_user.role != 'root': 
             return jsonify(msg="{You are not allowed to make a root!"), 403
-            
-        token = generate_verification_token(data['email'])
-        verification_email = url_for('user_routes.verify_email', token=token, _external=True)
-        html = render_template_string("<p>Welcome! Thanks for signing up. Please follow this link \
-                                      to activate your account:</p> <p><a href='{{ verification_email }}'\
-                                      >{{ verification_email }}</a></p> <br> <p>Thanks!</p>",\
-                                      verification_email=verification_email)
-        subject = "Please Verify your email"
-        send_email(user.email, subject, html)
+        
+        # Comment from this line if you don't want use email.
+        
+        # token = generate_verification_token(data['email'])  
+        # verification_email = url_for('user_routes.verify_email', token=token, _external=True) 
+        # html = render_template_string("<p>Welcome! Thanks for signing up. Please follow this link \
+        #                               to activate your account:</p> <p><a href='{{ verification_email }}'\
+        #                               >{{ verification_email }}</a></p> <br> <p>Thanks!</p>",\
+        #                               verification_email=verification_email)
+        # subject = "Please Verify your email"
+        # send_email(user.email, subject, html)
+        
+        # Comment to this line if you don't want use email.
+        
         user.create()
         return response_with(resp.SUCCESS_201)
     except Exception as e:
@@ -97,10 +102,14 @@ def authenticate_user():
             current_user = User.find_by_username(data['username'])
         if not current_user:
             return response_with(resp.SERVER_ERROR_404) 
-        if current_user and not current_user.isVerified:
-            return jsonify(message='User is not verified'), 403    
+        
+        # Comment from this line if you don't want use email.
+        # if current_user and not current_user.isVerified: 
+        #     return jsonify(message='User is not verified'), 403   
+        #Comment to this line if you don't want use email.
+        
         if User.verify_hash(data['password'], current_user.password):
-            access_token = create_access_token(identity = current_user.id)
+            access_token = create_access_token(identity = current_user.id ,   expires_delta = False)
             return response_with(resp.SUCCESS_200, \
                                  value={'message': 'Logged in as {}'.format(current_user.username), \
                                         "access_token": access_token})
@@ -111,25 +120,7 @@ def authenticate_user():
         return response_with(resp.INVALID_INPUT_422)
 
     
-#get access
-# @user_routes.route('/login', methods=['POST'])
-# def authenticate_user():
-#     try:
-#         data = request.get_json()
-#         current_user = User.find_by_username(data['username'])
-#         if not current_user:
-#             return response_with(resp.SERVER_ERROR_404)
-#         if User.verify_hash(data['password'], current_user.password):
-#             access_token = create_access_token(identity = data['username'], \
-#                                                 expires_delta = False) #it should be True
-#             return response_with(resp.SUCCESS_201, \
-#                                   value={'message': 'Logged in as {}'.format(current_user.username), \
-#                                         "access_token": access_token})
-#         else:
-#             return response_with(resp.UNAUTHORIZED_401)
-#     except Exception as e:
-#         print(e)
-#         return response_with(resp.INVALID_INPUT_422)
+
 
 #creat a root user as principal administrator
 @user_routes.route('/root', methods=['POST'])

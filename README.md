@@ -241,11 +241,11 @@ RESPONSE
 This access_token will be used to login in. 
 
 
-For the rest endpoints in customers you need to login in and and for users, the user's role has to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modify and add more users with different authorizations. 
+For the rest endpoints in customers you need to login in and for the endpoinst in users, you also need the user's role has to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modify and add more users with different authorizations. 
 
 
 
-
+REQUEST
 ```json{
 Header {Authorization: 
 
@@ -254,18 +254,55 @@ Barear eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODk5
 
 
 }
+```
+
+* Create user
+
 ```json
 
 {
-            "username": "paul",
-           "email" : "paul@gmail.com",
-           "password" : "hello",
-         }
+	"username": "paul",
+	"email" : "paul@gmail.com",
+	"password" : "hello",
+}
 
 
 }
 
 ```
+
+We omit the header in the following  but it's necessary. 
+
+If it's a valid email you will get:
+
+RESPONSE
+```json
+{
+
+    "code": "success"
+}
+
+
+Open the link in the email and see:
+
+RESPONSE
+```json
+{"code":"success","message":"E-mail verified, you can proceed to login now."}
+
+```
+
+If you do not want to deal with emails, you can comment several lines in the functions authenticate_user and create_user in api/routes/users.py. The exact lines are indicated.
+
+
+
+If the token expired:
+RESPONSE
+```json
+{
+    "msg": "Token has expired"
+}
+```
+You can change the time, in confirm_verification_token(token, expiration=1800), in api/utils/token.py. Also you can put tokens with no expiration type in the parameters of  create_access_token(... expires_delta= False). This in the function authenticate_user, in api/routes/users.py.
 
 
 ## Running the tests
