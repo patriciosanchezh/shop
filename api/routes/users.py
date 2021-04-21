@@ -104,12 +104,12 @@ def authenticate_user():
             return response_with(resp.SERVER_ERROR_404) 
         
         # Comment from this line if you don't want use email.
-        # if current_user and not current_user.isVerified: 
-        #     return jsonify(message='User is not verified'), 403   
+        if current_user and not current_user.isVerified: 
+            return jsonify(message='User is not verified'), 403   
         #Comment to this line if you don't want use email.
         
         if User.verify_hash(data['password'], current_user.password):
-            access_token = create_access_token(identity = current_user.id ,   expires_delta = False)
+            access_token = create_access_token(identity = current_user.id ) #,   expires_delta = False)
             return response_with(resp.SUCCESS_200, \
                                  value={'message': 'Logged in as {}'.format(current_user.username), \
                                         "access_token": access_token})

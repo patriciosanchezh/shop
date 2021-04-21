@@ -156,12 +156,15 @@ src
     ```
 *All this info you can find in your email, configurations. Some servers require a previous configuration in its site. By example, I used a scholar email server. 
 
+* NOTE: If you do not want to deal with emails, you can comment several lines in the functions authenticate_user, create_user and update_user in api/routes/users.py. The exact lines are indicated.
+
+* NOTE: Email credentials are not required for the test.
 
 * The database with users and customers will be in api/config/database/db.sqlite. If you what a clean database type
 
 
     ```
-    (venv) flask-rest-api/src $ rm api/config/database/db.sqlite
+	(venv) flask-rest-api/src $ rm api/config/database/db.sqlite
     ```
 
 Each time you use the app you get the last database. It's possible to connect wit a sql server too.
@@ -298,7 +301,7 @@ RESPONSE
 
 ```
 
-NOTE: If you do not want to deal with emails, you can comment several lines in the functions authenticate_user, create_user and update_user in api/routes/users.py. The exact lines are indicated.
+*NOTE: If you do not want to deal with emails, you can comment several lines in the functions authenticate_user, create_user and update_user in api/routes/users.py. The exact lines are indicated.
 
 
 
@@ -311,7 +314,7 @@ RESPONSE
     "msg": "Token has expired"
 }
 ```
-NOTE: You can change the time, in confirm_verification_token(token, expiration=1800), in api/utils/token.py. Also you can put tokens with no expiration type in the parameters of  create_access_token(... expires_delta= False). This in the function authenticate_user, in api/routes/users.py.
+* NOTE: You can change the time, in confirm_verification_token(token, expiration=1800), in api/utils/token.py. Also you can put tokens with no expiration type in the parameters of  create_access_token(... expires_delta= False). This in the function authenticate_user, in api/routes/users.py.
 
 
 * Get user list
@@ -415,6 +418,7 @@ DELETE http://127.0.0.1:5000/api/users/2
 404 NO CONTENT
 
 
+### Customers endpoint
 
 
 ## Run the tests ##
