@@ -20,9 +20,77 @@ Main libraries used:
 1. Flask - API design and working with third party APIs
 2. Flask-SQLAlchemy - adds support for SQLAlchemy ORM.
 
+
+## Prerequisites
+
+python 3.8.6
+
+Flask==1.1.2
+
+Flask-JWT-Extended==4.1.0
+
+Flask-Login==0.5.0
+
+Flask-Mail==0.9.1
+
+flask-marshmallow==0.14.0
+
+Flask-SQLAlchemy==2.5.1
+
+marshmallow-sqlalchemy==0.24.2
+
+nose==1.3.7
+
+passlib==1.7.4
+
+unittest2==1.1.0
+
+
+## Installation 
+
+This project was made in macOS catalina, the commands for another OS can be different.
+
+* If you wish to run your own build, first ensure you have python3 globally installed in your computer. If not, you can get python3 [here](https://www.python.org).
+
+* Now, type the following command to create a new directory of name flask-rest-api and open it in your terminal.
+    ```
+        $ mkdir flask-rest-api && cd flask-rest-api
+    ```
+
+
+* Git clone this repo to your computer
+    ```
+        flask-rest-api $ git clone https://github.com/patriciosanchezh/shop.git
+    ```
+
+
+* Rename the directory shop to src. This in necessary in oder to run the test using library nose, if you know a better way, please let me know.
+
+    ```
+        $ mv shop src
+    ```
+
+* Create and activate your virtual environment in python3:
+    ```
+        $ python3 -m venv venv
+	$ source ./venv/bin/activate 
+    ```
+
+* #### Install your requirements
+    ```
+    (venv)$ pip install -r requirements.txt
+    ```
+
+
+
+
+
 ## Project structure:
+
+Now the project must look like this.
 ```
-.
+venv/
+src
 ├── README.md
 ├── run.py
 ├── main.py
@@ -58,63 +126,10 @@ Main libraries used:
 └── requirements.txt
 
 ```
-## Installation / Usage
-* If you wish to run your own build, first ensure you have python3 globally installed in your computer. If not, you can get python3 [here](https://www.python.org).
-* After this, ensure you have installed virtualenv globally as well. If not, run this:
-    ```
-        $ pip install virtualenv
-    ```
-* Git clone this repo to your PC
-    ```
-        $ git clone git@github.com:gitgik/flask-rest-api.git
-    ```
 
 
-* #### Dependencies
-    1. Cd into your the cloned repo as such:
-        ```
-        $ cd flask-rest-api
-        ```
 
-    2. Create and fire up your virtual environment in python3:
-        ```
-        $ virtualenv -p python3 venv
-        $ pip install autoenv
-        ```
 
-* #### Environment Variables
-    Create a .env file and add the following:
-    ```
-    source venv/bin/activate
-    export SECRET="some-very-long-string-of-random-characters-CHANGE-TO-YOUR-LIKING"
-    export APP_SETTINGS="development"
-    export DATABASE_URL="postgresql://localhost/flask_api"
-    ```
-
-    Save the file. CD out of the directory and back in. `Autoenv` will automagically set the variables.
-    We've now kept sensitive info from the outside world! 😄
-
-* #### Install your requirements
-    ```
-    (venv)$ pip install -r requirements.txt
-    ```
-
-* #### Migrations
-    On your psql console, create your database:
-    ```
-    > CREATE DATABASE flask_api;
-    ```
-    Then, make and apply your Migrations
-    ```
-    (venv)$ python manage.py db init
-
-    (venv)$ python manage.py db migrate
-    ```
-
-    And finally, migrate your migrations to persist on the DB
-    ```
-    (venv)$ python manage.py db upgrade
-    ```
 
 * #### Running It
     On your terminal, run the server using this one simple command:
@@ -151,30 +166,6 @@ mkdir author-manager && cd author-manager
 source ./shop/bin/activate 
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
-
-### Prerequisites
-
-python 3.8.6
-
-Flask==1.1.2
-
-Flask-JWT-Extended==4.1.0
-
-Flask-Login==0.5.0
-
-Flask-Mail==0.9.1
-
-flask-marshmallow==0.14.0
-
-Flask-SQLAlchemy==2.5.1
-
-marshmallow-sqlalchemy==0.24.2
-
-nose==1.3.7
-
-passlib==1.7.4
-
-unittest2==1.1.0
 
 
 ```
