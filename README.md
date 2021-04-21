@@ -610,7 +610,7 @@ DELETE http://127.0.0.1:5000/api/customers/1
     (venv) flask-rest-api/src $ nosetests api/tests/test_users.py
 ```
 
-It will be run 17 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_users.py to get more details. 
+It will  run 17 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_users.py to get more details. 
 
 
 
@@ -623,7 +623,7 @@ In order to run the test for customers
     (venv) flask-rest-api/src $ nosetests api/tests/test_customers.py
 ```
 
-It will be run 9 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_customers.py to get more details. 
+It will  run 9 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_customers.py to get more details. 
 
 
 
