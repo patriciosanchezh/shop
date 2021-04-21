@@ -245,6 +245,8 @@ For the rest endpoints in customers you need to login in and for the endpoinst i
 
 
 * Create user
+
+
 REQUEST
 
 
@@ -312,23 +314,25 @@ You can change the time, in confirm_verification_token(token, expiration=1800), 
 
 ## Running the tests
 
-*In order the test for users
+*In order to run the tests for users
+
     ```
     (venv) flask-rest-api/src $ nosetests api/tests/test_users.py
     ```
 
-It will be run 17 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_users.py to see them. Exactly they do:
+It will be run 17 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_users.py to get more details. 
 
 
 
 *For the test for customers
 
-In order the test for users
-    ```
+In order to run the test for customers
+   
+     ```
     (venv) flask-rest-api/src $ nosetests api/tests/test_customers.py
     ```
 
-It will be run 9 tests.
+It will be run 9 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_customers.py to get more details. 
 
 
 
