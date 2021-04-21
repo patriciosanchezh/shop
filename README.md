@@ -465,7 +465,7 @@ RESPONSE
 
 ```
 
-*Upload photo
+* Upload photo
 
 POST http://127.0.0.1:5000/api/customers/photo/1
 
@@ -489,12 +489,12 @@ RESPONSE
 }
 
 
-Each time you upload a new photo, the old one is deleted. The number after photo/ corresponds to customer.id.
+
 
 ```
 
 
-
+Each time you upload a new photo, the old one is deleted. The number after photo/ corresponds to customer.id.
 
 
 ## Run the tests ##
