@@ -127,6 +127,7 @@ src
 ```
 
 
+The endpoints are defined in routes. The models for the database are in models. 
 
 
 ## Run app ##
@@ -629,7 +630,7 @@ It will be run 9 tests, with different configurations, simulating all the functi
 
 ## Authors
 
-* **Patricio Sánchez** - 
+* **Patricio Sánchez** 
 
 
 
