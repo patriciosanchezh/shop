@@ -267,7 +267,7 @@ Barear eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODk5
 {
 	"username": "paul",
 	"email" : "paul@gmail.com",
-	"password" : "hello",
+	"password" : "hello"
 }
 
 
@@ -298,7 +298,7 @@ RESPONSE
 
 ```
 
-If you do not want to deal with emails, you can comment several lines in the functions authenticate_user and create_user in api/routes/users.py. The exact lines are indicated.
+NOTE: If you do not want to deal with emails, you can comment several lines in the functions authenticate_user, create_user and update_user in api/routes/users.py. The exact lines are indicated.
 
 
 
@@ -311,7 +311,7 @@ RESPONSE
     "msg": "Token has expired"
 }
 ```
-You can change the time, in confirm_verification_token(token, expiration=1800), in api/utils/token.py. Also you can put tokens with no expiration type in the parameters of  create_access_token(... expires_delta= False). This in the function authenticate_user, in api/routes/users.py.
+NOTE: You can change the time, in confirm_verification_token(token, expiration=1800), in api/utils/token.py. Also you can put tokens with no expiration type in the parameters of  create_access_token(... expires_delta= False). This in the function authenticate_user, in api/routes/users.py.
 
 
 * Get user list
@@ -360,29 +360,60 @@ REPONSE
 }
 ```
 
+* Update user
+
 PUT http://127.0.0.1:5000/api/users/2
 
 ```json
 {
-        "username": "harrison",
-         "password" : "somthing"
-         }
+        "username": "maccartney",
+        "password" : "yesterday"
+}
 
 ```
 
 RESPONSE
+
 ```json
 {
     "code": "success",
     "user": {
-        "email": "george@gmail.com",
+        "email": "paul@gmail.com",
         "id": 2,
         "role": "user",
-        "username": "harrison"
+        "username": "maccartney"
     }
 }
 
 ```
+
+* Change status user
+
+PUT http://127.0.0.1:5000/api/users/status/2
+
+```json
+{
+"role": "admin"
+}
+
+```
+
+RESPONSE
+
+```json
+{
+    "code": "success"
+}
+
+```
+
+
+* Delete user
+
+DELETE http://127.0.0.1:5000/api/users/2
+
+404 NO CONTENT
+
 
 
 

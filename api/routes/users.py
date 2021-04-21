@@ -40,14 +40,14 @@ def create_user():
         
         # Comment from this line if you don't want use email.
         
-        token = generate_verification_token(data['email'])  
-        verification_email = url_for('user_routes.verify_email', token=token, _external=True) 
-        html = render_template_string("<p>Welcome! Thanks for signing up. Please follow this link \
-                                      to activate your account:</p> <p><a href='{{ verification_email }}'\
-                                      >{{ verification_email }}</a></p> <br> <p>Thanks!</p>",\
-                                      verification_email=verification_email)
-        subject = "Please Verify your email"
-        send_email(user.email, subject, html)
+        # token = generate_verification_token(data['email'])  
+        # verification_email = url_for('user_routes.verify_email', token=token, _external=True) 
+        # html = render_template_string("<p>Welcome! Thanks for signing up. Please follow this link \
+        #                               to activate your account:</p> <p><a href='{{ verification_email }}'\
+        #                               >{{ verification_email }}</a></p> <br> <p>Thanks!</p>",\
+        #                               verification_email=verification_email)
+        # subject = "Please Verify your email"
+        # send_email(user.email, subject, html)
         
         # Comment to this line if you don't want use email.
         
@@ -104,8 +104,8 @@ def authenticate_user():
             return response_with(resp.SERVER_ERROR_404) 
         
         # Comment from this line if you don't want use email.
-        if current_user and not current_user.isVerified: 
-            return jsonify(message='User is not verified'), 403   
+        # if current_user and not current_user.isVerified: 
+        #     return jsonify(message='User is not verified'), 403   
         #Comment to this line if you don't want use email.
         
         if User.verify_hash(data['password'], current_user.password):
@@ -180,16 +180,16 @@ def update_user(user_id):
             return jsonify(msg="{} is not a valid role!".format(get_user.role)), 403
         
         # Comment from this line if you don't want use email.
-        if "email" in data:
-            get_user.isVerified = False
-            token = generate_verification_token(data['email'])
-            verification_email = url_for('user_routes.verify_email', token=token, _external=True)
-            html = render_template_string("<p>Welcome! Thanks for signing up. Please follow this link \
-                                          to activate your account:</p> <p><a href='{{ verification_email }}'\
-                                          >{{ verification_email }}</a></p> <br> <p>Thanks!</p>",\
-                                          verification_email=verification_email)
-            subject = "Please Verify your email"
-            send_email(get_user.email, subject, html)
+        # if "email" in data:
+        #     get_user.isVerified = False
+        #     token = generate_verification_token(data['email'])
+        #     verification_email = url_for('user_routes.verify_email', token=token, _external=True)
+        #     html = render_template_string("<p>Welcome! Thanks for signing up. Please follow this link \
+        #                                   to activate your account:</p> <p><a href='{{ verification_email }}'\
+        #                                   >{{ verification_email }}</a></p> <br> <p>Thanks!</p>",\
+        #                                   verification_email=verification_email)
+        #     subject = "Please Verify your email"
+        #     send_email(get_user.email, subject, html)
         # Comment to this line if you don't want use email.
     
         db.session.add(get_user)
