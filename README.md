@@ -138,7 +138,7 @@ The endpoints are defined in routes. The models which defined users and customer
    	 (venv) flask-rest-api/src $
     ```
 
-* Now before run, we have to make a changes in src/api/conifg/conifg.py in the class DevelopmentConfig. In order to send the email for Auth 2 protocol for authentication, use your own credentials for these fields:
+* Now before running, you have to make some changes in src/api/conifg/conifg.py in the class DevelopmentConfig. In order to send the email for Auth 2 protocol for authentication, use your own credentials for these fields:
 
     ```
     MAIL_DEFAULT_SENDER= '<mail_sender>'
@@ -149,20 +149,20 @@ The endpoints are defined in routes. The models which defined users and customer
     MAIL_USE_TLS= False
     MAIL_USE_SSL= True 
     ```
-*All this info you can find in your email, configurations. Some servers require a previous configuration in its site. By example, I used a scholar email server. 
+* You can find all this info in your email configurations. Some servers require a previous configuration in its site. For example, I used a scholar email server. 
 
 * NOTE: If you do not want to deal with emails, you can comment several lines in the functions authenticate_user, create_user and update_user in api/routes/users.py. The exact lines are indicated.
 
 * NOTE: Email credentials are not required for the test.
 
-* The database with users and customers will be in api/config/database/db.sqlite. If you what a clean database type
+* The database with users and customers will be in api/config/database/db.sqlite. If you want a clean database type:
 
 
     ```
 	(venv) flask-rest-api/src $ rm api/config/database/db.sqlite
     ```
 
-Each time you use the app you get the last database. It's possible to connect wit a sql server too.
+Each time you use the app you get the last database. It's possible to connect to a sql server too.
 
 * Now you are ready to run it.
 
@@ -172,7 +172,7 @@ Each time you use the app you get the last database. It's possible to connect wi
     (venv) flask-rest-api/src $ pyhon run.py
     ```
 
-    You can now access the app on your local browser by using
+    You can now access the app on your local browser by using:
 
     ```
     http://localhost:5000/api/
@@ -182,6 +182,7 @@ Each time you use the app you get the last database. It's possible to connect wi
 
 
 ## Usage
+
 ### Users endpoint
 
 First you need to create the first user, which will have the role of root. This endpoint is only possible for 1 time. 
@@ -206,6 +207,7 @@ RESPONSE
 "code": "success",
 }
 ```
+
 This user doesn't need to be verified. 
 
 * Login user
@@ -236,17 +238,17 @@ RESPONSE
 
 ```
 
-This access_token will be used to login in. 
+This access_token will be used to log in. 
 
 
-*VERY IMPORTANT NOTE: For the rest endpoints in customers you need to login in and for the endpoinst in users, you also need the user's role has to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modify and add more users with different authorizations. 
+*VERY IMPORTANT NOTE: For the rest endpoints in customers you need to log in and for the endpoints in users, you also need the user's role to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modified and add more users with different authorizations. 
 
 
 * Create user
 
+POST http://127.0.0.1:5000/api/users/
 
 REQUEST
-
 
 ```json{
 Header {Authorization: 
