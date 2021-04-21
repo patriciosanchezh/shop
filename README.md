@@ -64,7 +64,7 @@ This project was made in macOS catalina, the commands for another OS can be diff
     ```
 
 
-* Rename the directory shop to src. This in necessary in oder to run the test using library nose, if you know a better way, please let me know.
+* Rename the directory shop to src. This is necessary in oder to run the test using library nose, if you know a better way, please let me know.
 
     ```
         $ mv shop src
@@ -80,8 +80,6 @@ This project was made in macOS catalina, the commands for another OS can be diff
     ```
     (venv)$ pip install -r requirements.txt
     ```
-
-
 
 
 
@@ -131,54 +129,44 @@ src
 
 
 
-* #### Running It
+## Running
+
+* Before Running enter to src.
+	
+    ```
+         (venv) flask-rest-api $ cd src
+    ```
+
+* It must looks like this
+    ```
+    (venv) flask-rest-api/src $
+    ```
+
+* Now before run, we have to make a changes in src/api/conifg/conifg.py in the class class DevelopmentConfig. In order to send the email for Auth 2 protocol for authentication, use your own credentials for this fields:
+
+    ```
+    MAIL_DEFAULT_SENDER= '<mail_sender>'
+    MAIL_SERVER= '<mail_smtp_host>'
+    MAIL_PORT= '<mail_port>'
+    MAIL_USERNAME= '<mail_username>'
+    MAIL_PASSWORD= '<mail_password>'
+    MAIL_USE_TLS= False
+    MAIL_USE_SSL= True 
+    ```
+All this info you can find in your email, configurations. Some servers require a previous configuration in its site. By example, I used a scholar email server. 
+
+
+
     On your terminal, run the server using this one simple command:
     ```
-    (venv)$ flask run
+    (venv) flask-rest-api/src $ pyhon run.py
     ```
+
     You can now access the app on your local browser by using
     ```
-    http://localhost:5000/bucketlists/
+    http://localhost:5000/api/
     ```
-    Or test creating bucketlists using Postman
 
-## Getting Started
-
-First create a directory
-
-Now clone the directory.
-
-gh repo clone patriciosanchezh/shop
-
-python3.8 -m venv shop 
-
-python 3.8
-
-In the mail directory there
-
-
-Each time a new photo is uploaded, the old one is deleted in the database.
-
-Any of the last functions require  to be logged.
-
-mkdir author-manager && cd author-manager
-
-source ./shop/bin/activate 
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
-
-
-```
-Give examples
-```
-
-### Installing
-
-pip install -r requirements.txt
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
 
 ```
 Give the example
@@ -192,66 +180,58 @@ The app will be running in `localhost:5000`
 
 And repeat
 
+## Usage
+### Users endpoint
+POST http://127.0.0.1:5000/api/users
+
+REQUEST
+```json
+{
+	"name": "John John"
+}
+```
+RESPONSE
+```json
+{
+    "id": 1,
+    "name": "John John",
+    "todos": []
+}
+```
+
+
 ```
 until finished
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+
 
 ## Running the tests
 
-In order to run the tests the main folder must have the name src. 
+*In order the test for users
+    ```
+    (venv) flask-rest-api/src $ nosetests api/tests/test_users.py
+    ```
+
+It will be run 17 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_users.py to see them. Exactly they do:
 
 
 
+*For the test for customers
 
-### Break down into end to end tests
+In order the test for users
+    ```
+    (venv) flask-rest-api/src $ nosetests api/tests/test_customers.py
+    ```
 
-Explain what these tests test and why
+It will be run 9 tests.
 
-```
-Give an example
-```
 
-### And coding style tests
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
 * **Patricio Sánchez** - 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
