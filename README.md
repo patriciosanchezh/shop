@@ -497,10 +497,107 @@ RESPONSE
 Each time you upload a new photo, the old one is deleted. The number after photo/ corresponds to customer.id.
 
 
+* Get user list
+
+
+GET http://127.0.0.1:5000/api/customers/
+
+REPONSE
+
+```json
+{
+    "code": "success",
+    "customers": [
+        {
+            "creator_user_id": 1.0,
+            "email": "waters@gmail.com",
+            "id": 1.0,
+            "last_modifier_user_id": 1.0,
+            "name": "Roger",
+            "surname": "Waters"
+        },
+        {
+            "creator_user_id": 1.0,
+            "email": "elthon@gmail.com",
+            "id": 2.0,
+            "last_modifier_user_id": 1.0,
+            "name": "Elthon",
+            "surname": "John"
+        }
+    ]
+}
+```
+
+* We added Elthon John before.
+
+* Get user 
+
+GET http://127.0.0.1:5000/api/customers/1
+
+REPONSE
+
+```json
+{
+    "code": "success",
+    "customer": {
+        "creator_user_id": 1.0,
+        "email": "waters@gmail.com",
+        "id": 1.0,
+        "last_modifier_user_id": 1.0,
+        "name": "Roger",
+        "photo": "http://127.0.0.1:5000/photo/1.jpg",
+        "surname": "Waters"
+    }
+}
+```
+
+* Update customer
+
+PUT http://127.0.0.1:5000/api/users/2
+
+```json
+{
+    "name": "Rogelio",
+    "surname": "Aguas",
+    "email": "rogelio@gmail.com"
+
+}
+
+```
+
+
+
+RESPONSE
+
+```json
+{
+    "code": "success",
+    "customer": {
+        "creator_user_id": 1.0,
+        "email": "rogelio@gmail.com",
+        "id": 1.0,
+        "last_modifier_user_id": 1.0,
+        "name": "Rogelio",
+        "surname": "Aguas"
+    }
+}
+
+```
+
+
+
+
+* Delete customer
+
+DELETE http://127.0.0.1:5000/api/customers/1
+
+404 NO CONTENT
+
+
+
+
+
 ## Run the tests ##
-
-
-
 
 
 
