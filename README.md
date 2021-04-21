@@ -274,10 +274,10 @@ Barear eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODk5
 }
 
 ```
-You can add the role. You can put root only if you are connect as a user's root.
+You can add the role. You can put root only if you are logged in as a user with role root.
 
 
-NOTE: We omit the header in the following but it's necessary. 
+NOTE: We omit writing the header in the following but it's necessary. 
 
 If it's a valid email you will get:
 
@@ -302,7 +302,7 @@ RESPONSE
 
 
 
-If the token expired:
+If the token has expired:
 
 
 RESPONSE
@@ -311,7 +311,7 @@ RESPONSE
     "msg": "Token has expired"
 }
 ```
-* NOTE: You can change the time, in confirm_verification_token(token, expiration=1800), in api/utils/token.py. Also you can put tokens with no expiration type in the parameters of  create_access_token(... expires_delta= False). This in the function authenticate_user, in api/routes/users.py.
+* NOTE: You can change the time, in confirm_verification_token(token, expiration=1800), in api/utils/token.py. Also you can put tokens with no expiration in the parameters of  create_access_token(... expires_delta= False). This in the function authenticate_user, in api/routes/users.py.
 
 
 * Get user list
@@ -598,22 +598,22 @@ DELETE http://127.0.0.1:5000/api/customers/1
 
 
 
-* Recall rename the directory shop to src.
+* Recall to rename the directory shop to src.
 
-*In order to run the tests for users
+* In order to run the tests for users:
 
 ```
     (venv) flask-rest-api/src $ nosetests api/tests/test_users.py
 ```
 
-It will  run 17 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_users.py to get more details. 
+It will run 17 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_users.py to get more details. 
 
 
 
 
-*For the test for customers
 
-In order to run the test for customers
+
+In order to run the test for customers:
    
 ```
     (venv) flask-rest-api/src $ nosetests api/tests/test_customers.py
@@ -624,7 +624,7 @@ It will  run 9 tests, with different configurations, simulating all the function
 
 
 
-## Authors
+## Author
 
 * **Patricio Sánchez** 
 
