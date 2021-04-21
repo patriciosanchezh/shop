@@ -74,11 +74,12 @@ This project was made in macOS catalina, the commands for another OS can be diff
     ```
         $ python3 -m venv venv
 	$ source ./venv/bin/activate 
+	(venv)$
     ```
 
 * #### Install your requirements
     ```
-    (venv)$ pip install -r requirements.txt
+	(venv)$ pip install -r requirements.txt
     ```
 
 
@@ -228,13 +229,21 @@ You can use username or email; the password is required. The user needs to be ve
 RESPONSE
 ```json
 {
-"code": "success",
+
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODk5OTQ5NCwianRpIjoiMmNhYWIxMTgtYTlkZS00MDYwLTliYzUtNzgwNzBjODYwMmI2IiwibmJmIjoxNjE4OTk5NDk0LCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoxLCJleHAiOjE2MTkwMDAzOTR9.7FkiWB0cfpHdOOmI9U32Dnc5m-ox_ORB_hA7mAeWK-U",
+    "code": "success",
+    "message": "Logged in as ringo"
+
 }
 
 ```
 
+This access_token will be used to login in. 
 
-For the rest endpoints in users you need to login in and the user's role has to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modify and add more users with different authorizations. 
+
+For the rest endpoints in customers you need to login in and and for users, the user's role has to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modify and add more users with different authorizations. 
+
+
 
 
 
