@@ -244,7 +244,7 @@ RESPONSE
 This access_token will be used to login in. 
 
 
-For the rest endpoints in customers you need to login in and for the endpoinst in users, you also need the user's role has to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modify and add more users with different authorizations. 
+*VERY IMPORTANT NOTE: For the rest endpoints in customers you need to login in and for the endpoinst in users, you also need the user's role has to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modify and add more users with different authorizations. 
 
 
 * Create user
