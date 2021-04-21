@@ -262,7 +262,7 @@ Barear eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODk5
 
 
 
-```json
+```json{
 
 {
 	"username": "paul",
@@ -274,8 +274,10 @@ Barear eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODk5
 }
 
 ```
+You can add the role. You can put root only if you are connect as a user's root.
 
-We omit the header in the following but it's necessary. 
+
+NOTE: We omit the header in the following but it's necessary. 
 
 If it's a valid email you will get:
 
@@ -312,7 +314,79 @@ RESPONSE
 You can change the time, in confirm_verification_token(token, expiration=1800), in api/utils/token.py. Also you can put tokens with no expiration type in the parameters of  create_access_token(... expires_delta= False). This in the function authenticate_user, in api/routes/users.py.
 
 
-## Running the tests
+* Get user list
+
+
+GET http://127.0.0.1:5000/api/users/
+
+REPONSE
+
+```json
+{
+    "code": "success",
+    "users": [
+        {
+            "email": "ringo@gmail.com",
+            "id": 1,
+            "role": "root",
+            "username": "ringo"
+        },
+        {
+            "email": "paul@gmail.com",
+            "id": 2,
+            "role": "user",
+            "username": "paul"
+        }
+    ]
+}
+```
+
+* Get user 
+
+GET http://127.0.0.1:5000/api/users/1
+
+REPONSE
+
+```json
+{
+    "code": "success",
+    "user": {
+        "email": "ringo@gmail.com",
+        "id": 1,
+        "isVerified": true,
+        "role": "root",
+        "username": "ringo"
+    }
+}
+```
+
+PUT http://127.0.0.1:5000/api/users/2
+
+```json
+{
+        "username": "harrison",
+         "password" : "somthing"
+         }
+
+```
+
+RESPONSE
+```json
+{
+    "code": "success",
+    "user": {
+        "email": "george@gmail.com",
+        "id": 2,
+        "role": "user",
+        "username": "harrison"
+    }
+}
+
+```
+
+
+
+## Run the tests ##
 
 *In order to run the tests for users
 
