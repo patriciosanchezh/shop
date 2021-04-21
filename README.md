@@ -2,16 +2,14 @@
 
 This project consists in a REST API for managing customer data for a small shop. There are 2 groups with different endpoints: users and customers. The users can have only 3 different roles (root, admin and user), and depending of that, they are allowed to make more things. The root is the first user and he has to be created first in order to create more users or admins. The tasks are the following:
 
-user can:• List all customers in the database.• Get full customer information, including a photo URL.• Create a new customer:	• All customer have name, surname, id, email (unique), creator user, 
+A user can:• List all customers in the database.• Get full customer information, including a photo URL.• Create a new customer:	• All customers have name, surname, id, email (unique), creator user, 
 	last modifier user, date created and URL photo.
 	• name, surname and email are required.• Upload a photo for each user. • Update an existing customer.• Delete an existing customer.
 
-Any of the last functions require user to be logged.
+Any of the last functions require the user to be logged in.
 
 An admin can also:• Create users. Users have the fields id, username (unique), email (unique), password,
- 		role and isVerified (which indicates if the user has a confirmation via 		email). All of them are required but role and isVerified,
-		which are user and False, by default and respectably. In order to valid
-		the authentication, a email is sent to verify the identity. • Delete users.• Update users.• List users.• Change admin status. 
+ 		role and isVerified (which indicates if the user has a confirmation via 		email). All of them are required. By default, role = user and isVerified = 		False. In order to valid the authentication, an email is sent to verify 		the identity. • Delete users.• Update users.• List users.• Change admin status. 
 
 
 
