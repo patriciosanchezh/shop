@@ -44,7 +44,7 @@ def upsert_customer_avatar(customer_id):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             extension = filename.split(".")[-1]
-            filename = str(get_customer.id) + "." + extension       #saves photo with customer.id plus original extension
+            filename = str(get_customer.id) + "." + extension       #save photo with customer.id plus original extension
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
             if get_customer.photo:           #remove old photo if it exists
                 old_photo = get_customer.photo.split("/")[-1]

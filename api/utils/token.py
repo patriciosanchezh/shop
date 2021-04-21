@@ -7,13 +7,13 @@ def generate_verification_token(email):
     return serializer.dumps(email, salt=current_app.config['SECURITY_PASSWORD_SALT'])
 
 
-def confirm_verification_token(token, expiration=3600):
+def confirm_verification_token(token, expiration=1800):
     serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
     try:
         email = serializer.loads(
             token,
             salt = current_app.config['SECURITY_PASSWORD_SALT'],
-            max_age = None #expiration None for test
+            max_age = expiration #None for test
         )
     except Exception as e:
         return e

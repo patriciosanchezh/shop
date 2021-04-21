@@ -1,19 +1,77 @@
 # Project Title
 
-This project consists in a REST API for managing customer data for a small shop. We have 2 groups with different endpoints, users and customers. The users can have only 3 different roles, root, admin and user, and depending of that, they are allowed to make more things. the root is the first user and he has to be created first in order to create more users or admins. The tasks are the following:
+This project consists in a REST API for managing customer data for a small shop. There are 2 groups with different endpoints: users and customers. The users can have only 3 different roles (root, admin and user), and depending of that, they are allowed to make more things. The root is the first user and he has to be created first in order to create more users or admins. The tasks are the following:
 
-user can:• List all customers in the database.• Get full customer information, including a photo URL.• Create a new customer:	• All customer have name, surname, id, email, creator user, last modifier user, 	date created and URL photo.
-	• name, surname and email are required.• Upload a photo for each user. Each time a new photo is uploaded, the old 		one is deleted in the database.• Update an existing customer.• Delete an existing customer.
+user can:• List all customers in the database.• Get full customer information, including a photo URL.• Create a new customer:	• All customer have name, surname, id, email (unique), creator user, 
+	last modifier user, date created and URL photo.
+	• name, surname and email are required.• Upload a photo for each user. • Update an existing customer.• Delete an existing customer.
 
-Any of the last functions require being a user and being logged.
+Any of the last functions require user to be logged.
 
-An admin can also:• Create users. Users have username (unique), email (unique), password and role. • Delete users.• Update users.• List users.• Change admin status. 
+An admin can also:• Create users. Users have the fields id, username (unique), email (unique), password,
+ 		role and isVerified. All of them are required but role and isVerified,
+		which are user and False, by default and respectably. In order to valid
+		the authentication, a email is sent to verify the identity. • Delete users.• Update users.• List users.• Change admin status. 
+
+In the mail directory there
 
 
-Any of the last functions require being a user and being logged.
+Each time a new photo is uploaded, the old one is deleted in the database.
+
+Any of the last functions require  to be logged.
+
+
+Main libraries used:
+1. Flask
+2. Flask-SQLAlchemy - adds support for SQLAlchemy ORM.
+
+## Project structure:
+```
+.
+├── README.md
+├── run.py
+├── main.py
+├── __init__.python
+├── api
+│   ├── __init__.python
+│   ├── config
+│   │   ├── __init__.py
+│   │	├── database
+│   │	│   └── db.slite
+│   │   └── config.py
+│   ├── models  
+│   │   ├── __init__.py
+│   │   ├── customers.py
+│   │   └── users.py
+│   ├── routes
+│   │   ├──  __init__.py
+│   │   ├── customers.py
+│   │   └── users.py
+│   ├── test
+│   │   ├──  __init__.py
+│   │   ├── test_customers.py
+│   │   └── test_users.py
+│   ├── utils
+│   │   ├──  __init__.py
+│   │   ├── database.py
+│   │   ├── email.py
+│   │   ├── responses.py
+│   │   ├── role_access.py
+│   │   ├── test_base.py
+│   │   └── token.py
+├── images
+└── requirements.txt
+
+```
 
 
 ## Getting Started
+
+First create a directory
+
+Now clone the directory.
+
+gh repo clone patriciosanchezh/shop
 
 python3.8 -m venv shop 
 
@@ -25,7 +83,7 @@ mkdir author-manager && cd author-manager
 
 source ./shop/bin/activate 
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 ### Prerequisites
 
@@ -59,6 +117,12 @@ Say what the step will be
 Give the example
 ```
 
+## Run app ##
+
+  `$ python ./run.py`
+
+The app will be running in `localhost:5000`
+
 And repeat
 
 ```
@@ -70,6 +134,8 @@ End with an example of getting some data out of the system or using it for a lit
 ## Running the tests
 
 In order to run the tests the main folder must have the name src. 
+
+
 
 
 ### Break down into end to end tests
@@ -108,7 +174,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Patricio Sánchez** - 
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 

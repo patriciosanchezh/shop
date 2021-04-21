@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask import jsonify
 from flask_jwt_extended import  get_jwt_identity
 from flask import url_for, render_template_string
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required
 import datetime
 
 from api.utils.responses import response_with
@@ -20,6 +20,7 @@ user_routes = Blueprint("user_routes", __name__)
 
 
 @user_routes.route('/', methods=['POST'])
+@jwt_required()
 @access_required('admin') 
 def create_user():
     try:
@@ -27,10 +28,8 @@ def create_user():
         if User.find_by_username(data['username']) is not None:
              return response_with(resp.INVALID_INPUT_422)
         data['password'] = User.generate_hash(data['password'])
-        
         user_schmea = UserSchema()
         user = user_schmea.load(data)
-        
         if user.role not in ACCESS.keys(): #check if it's a valid role 
             return jsonify(msg="{} is not a valid role!".format(user.role)), 403
         
@@ -52,6 +51,7 @@ def create_user():
     except Exception as e:
         print(e)
         return response_with(resp.INVALID_INPUT_422)
+
 
 @user_routes.route('/confirm/<token>', methods=['GET'])
 def verify_email(token):
@@ -97,14 +97,13 @@ def authenticate_user():
             current_user = User.find_by_username(data['username'])
         if not current_user:
             return response_with(resp.SERVER_ERROR_404) 
-        
         if current_user and not current_user.isVerified:
-            return  jsonify(msg="User is not verified"), 403 #user is not verified
+            return jsonify(message='User is not verified'), 403    
         if User.verify_hash(data['password'], current_user.password):
-            access_token = create_access_token(identity = current_user.id, \
-                                                expires_delta = False)
-            return response_with(resp.SUCCESS_200, value={'message': 'Logged in as admin', \
-                                                          "access_token": access_token})
+            access_token = create_access_token(identity = current_user.id)
+            return response_with(resp.SUCCESS_200, \
+                                 value={'message': 'Logged in as {}'.format(current_user.username), \
+                                        "access_token": access_token})
         else:
             return response_with(resp.UNAUTHORIZED_401)
     except Exception as e:
@@ -147,7 +146,9 @@ def create_root():
     return response_with(resp.SUCCESS_201)
 
 
+#get user list
 @user_routes.route('/', methods=['GET'])
+@jwt_required()
 @access_required('admin') 
 def get_user_list():
     get_users = User.query.all()
@@ -155,17 +156,19 @@ def get_user_list():
     users = user_schema.dump(get_users)
     return response_with(resp.SUCCESS_200, value={"users": users})
 
-#get complete info a user
+#get complete info of a user
 @user_routes.route('/<int:user_id>', methods=['GET'])
+@jwt_required()
 @access_required('admin') 
 def get_user(user_id):
     get_user = User.query.get_or_404(user_id)
-    user_schema = UserSchema(only=["id", 'username', 'email', 'role'])
+    user_schema = UserSchema(only=["id", 'username', 'email', 'role', 'isVerified'])
     user = user_schema.dump(get_user)
     return response_with(resp.SUCCESS_200, value={"user": user})
 
 
 @user_routes.route('/<int:user_id>', methods=['PUT'])
+@jwt_required()
 @access_required('admin') 
 def update_user(user_id):
     try:
@@ -208,6 +211,7 @@ def update_user(user_id):
         return response_with(resp.INVALID_INPUT_422)
 
 @user_routes.route('/<int:user_id>', methods=['DELETE'])
+@jwt_required()
 @access_required('admin') 
 def delete_user(user_id):
     get_user = User.query.get_or_404(user_id)
@@ -218,6 +222,7 @@ def delete_user(user_id):
     return response_with(resp.SUCCESS_204)
 
 @user_routes.route('status/<int:user_id>', methods=['POST'])
+@jwt_required()
 @access_required('admin') 
 def change_status_user(user_id):
     try:
@@ -227,14 +232,14 @@ def change_status_user(user_id):
         current_user = User.query.get(get_jwt_identity())
     
         if data["role"] not in ACCESS.keys():      #check if it's a valid role 
-            return jsonify(msg="{} is not a valid role!".format(get_user.role)), 403
+            return jsonify(msg="{} is not a valid role!".format(data["role"])), 403
         
         if data["role"] == 'root' and current_user.role != 'root': 
             return jsonify(msg="You cannot make a root!"), 403 
         
-        get_user.username == data["role"]
+        get_user.role = data["role"]
         
-        db.session.delete(get_user)
+        db.session.add(get_user)
         db.session.commit()
         return response_with(resp.SUCCESS_200)
     

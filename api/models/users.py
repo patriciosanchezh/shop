@@ -77,4 +77,4 @@ class UserSchema(ma.SQLAlchemySchema):
     email = fields.String(required=True)
     password = fields.String(required=True)
     role = fields.String(required=False)
-#    roles = fields.Nested(RoleSchema, many=True, only=['name'])
+    isVerified = fields.Boolean(dump_only=True)

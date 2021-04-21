@@ -1,9 +1,9 @@
 from functools import wraps
 from flask import jsonify
-from flask_jwt_extended import get_jwt_identity, verify_jwt_in_request
+from flask_jwt_extended import get_jwt_identity
 from api.models.users import User
 
-
+# Define the order of the required role
 ACCESS = {
     'user': 1,
     'admin': 2,
@@ -11,13 +11,12 @@ ACCESS = {
 }
 
 
-#decorator that verifies the JWT role
+# Verify the required role
 def access_required(role):
     def wrapper(fn):
         @wraps(fn)
         def decorator(*args, **kwargs):
-            verify_jwt_in_request()
-            current_user = User.find_by_email(get_jwt_identity())
+            current_user = User.find_by_id(get_jwt_identity())
             if ACCESS[current_user.role] >= ACCESS[role]:
                 return fn(*args, **kwargs)
             else:

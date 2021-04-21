@@ -67,12 +67,15 @@ class TestUsers(BaseTestCase):
             data=json.dumps(user),
             content_type='application/json'
         )
-
+        
+        data = json.loads(response.data)
+        
+        
         self.assertEqual(403, response.status_code)
-
+        self.assertTrue('User is not verified' == data['message'])
 
     def test_create_user_with_authorization(self):
-        token = login('john@gmail.com')
+        token = login(3)        #corresponding with user3.id
         
         user = {
             "username": "paul",
@@ -94,7 +97,7 @@ class TestUsers(BaseTestCase):
     
     
     def test_create_user_without_authorization(self):
-        token = login('ringo@gmail.com')
+        token = login(1)
         
         user = {
             "username": "paul",
@@ -133,7 +136,7 @@ class TestUsers(BaseTestCase):
     
     
     def test_create_user_without_username(self):
-        token = login('john@gmail.com')
+        token = login(3)
         
         user = {
            "email" : "paul@gmail.com",
@@ -151,7 +154,7 @@ class TestUsers(BaseTestCase):
         
         
     def test_create_user_with_username_exists(self):
-        token = login('john@gmail.com')
+        token = login(3)
         
         user = {'username': 'john',
            "email" : "paul@gmail.com",
@@ -168,7 +171,7 @@ class TestUsers(BaseTestCase):
         self.assertEqual(422, response.status_code)
         
     def test_create_user_with_wrong_role(self):
-        token = login('john@gmail.com')
+        token = login(3)
         
         user = {'username': 'paul',
            "email" : "paul@gmail.com",
@@ -223,7 +226,7 @@ class TestUsers(BaseTestCase):
 
 
     def test_get_user(self):
-        token = login('john@gmail.com')
+        token = login(3)
         
         user_to_get = User.find_by_email("george@gmail.com")
 
@@ -234,14 +237,17 @@ class TestUsers(BaseTestCase):
           )
         data = json.loads(response.data)
         
-        user = {'email': 'george@gmail.com', 'id': 2, 'role': 'user', 'username': 'george'}
+        print(data)
+        
+        user = {'email': 'george@gmail.com', 'id': 2, 'role': 'user', \
+                'username': 'george', 'isVerified': False}
         
         self.assertEqual(200, response.status_code)
         self.assertTrue(user == data['user']) #check the user
         
         
     def test_get_user_list(self):
-        token = login('john@gmail.com')
+        token = login(3)
         
 
         response = self.app.get(
@@ -259,7 +265,7 @@ class TestUsers(BaseTestCase):
         self.assertTrue(list_users == data['users']) #compare list of users
 
     def test_update_user(self):
-        token = login('john@gmail.com')
+        token = login(3)
         
         user = {
             "username": "harrison",
@@ -276,13 +282,14 @@ class TestUsers(BaseTestCase):
           )
         data = json.loads(response.data)
         
-        user_updated = {'email': 'harrison@gmail.com', 'id': 2, 'role': 'admin', 'username': 'harrison'}
+        user_updated = {'email': 'harrison@gmail.com', 'id': 2, \
+                        'role': 'admin', 'username': 'harrison'}
         
         self.assertEqual(200, response.status_code)
         self.assertTrue(user_updated == data['user']) 
     
     def test_delete_user(self):
-        token = login('john@gmail.com')
+        token = login(3)
         
         user = User.find_by_email("george@gmail.com")
 
@@ -293,6 +300,22 @@ class TestUsers(BaseTestCase):
           )
 
         self.assertEqual(204, response.status_code)
+        
+    def test_change_status_user(self):
+        token = login(3)
+        
+        data = {"role": "admin"}
+        
+        user = User.find_by_email("ringo@gmail.com")
+        
+        response = self.app.post(
+              '/api/users/status/'+str(user.id),
+              data=json.dumps(data),
+            content_type='application/json',
+            headers= { 'Authorization': 'Bearer '+ token }
+          )
+        
+        self.assertEqual(200, response.status_code)
         
 
 if __name__ == '__main__':
