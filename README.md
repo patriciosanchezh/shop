@@ -99,7 +99,7 @@ src
 │   ├── config
 │   │   ├── __init__.py
 │   │	├── database
-│   │	│   └── db.slite
+│   │	│   └── db.sqlite
 │   │   └── config.py
 │   ├── models  
 │   │   ├── __init__.py
@@ -156,6 +156,16 @@ src
     ```
 *All this info you can find in your email, configurations. Some servers require a previous configuration in its site. By example, I used a scholar email server. 
 
+
+* The database with users and customers will be in api/config/database/db.sqlite. If you what a clean database type
+
+
+    ```
+    (venv) flask-rest-api/src $ rm api/config/database/db.sqlite
+    ```
+
+Each time you use the app you get the last database. It's possible to connect wit a sql server too.
+
 * Now you are ready to run it.
 
     On your terminal, run the server using this one simple command:
@@ -171,17 +181,7 @@ src
     ```
 
 
-```
-Give the example
-```
 
-## Run app ##
-
-  `$ python ./run.py`
-
-The app will be running in `localhost:5000`
-
-And repeat
 
 ## Usage
 ### Users endpoint
@@ -246,6 +246,26 @@ For the rest endpoints in customers you need to login in and and for users, the 
 
 
 
+```json
+Header {Authorization: 
+
+Barear eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODk5OTQ5NCwianRpIjoiMmNhYWIxMTgtYTlkZS00MDYwLTliYzUtNzgwNzBjODYwMmI2IiwibmJmIjoxNjE4OTk5NDk0LCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoxLCJleHAiOjE2MTkwMDAzOTR9.7FkiWB0cfpHdOOmI9U32Dnc5m-ox_ORB_hA7mAeWK-U}
+
+
+
+}
+```json
+
+{
+            "username": "paul",
+           "email" : "paul@gmail.com",
+           "password" : "hello",
+         }
+
+
+}
+
+```
 
 
 ## Running the tests
