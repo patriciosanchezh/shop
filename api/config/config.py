@@ -25,7 +25,7 @@ class ProductionConfig(Config):
 
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database/db.sqlite')
     SQLALCHEMY_ECHO = False
     JWT_SECRET_KEY = 'JWT-SECRET'
     SECRET_KEY = 'SECRET-KEY'
