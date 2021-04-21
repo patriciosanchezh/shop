@@ -246,7 +246,7 @@ For the rest endpoints in customers you need to login in and and for users, the 
 
 
 
-```json
+```json{
 Header {Authorization: 
 
 Barear eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODk5OTQ5NCwianRpIjoiMmNhYWIxMTgtYTlkZS00MDYwLTliYzUtNzgwNzBjODYwMmI2IiwibmJmIjoxNjE4OTk5NDk0LCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoxLCJleHAiOjE2MTkwMDAzOTR9.7FkiWB0cfpHdOOmI9U32Dnc5m-ox_ORB_hA7mAeWK-U}
