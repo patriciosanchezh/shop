@@ -9,7 +9,7 @@ user can:• List all customers in the database.• Get full customer informat
 Any of the last functions require user to be logged.
 
 An admin can also:• Create users. Users have the fields id, username (unique), email (unique), password,
- 		role and isVerified. All of them are required but role and isVerified,
+ 		role and isVerified (which indicates if the user has a confirmation via 		email). All of them are required but role and isVerified,
 		which are user and False, by default and respectably. In order to valid
 		the authentication, a email is sent to verify the identity. • Delete users.• Update users.• List users.• Change admin status. 
 
@@ -187,6 +187,8 @@ And repeat
 
 First you need to create the first user, which will have the role of root. This endpoint is only possible for 1 time. 
 
+* Create root
+
 POST http://127.0.0.1:5000/api/users/root
 
 REQUEST
@@ -207,6 +209,7 @@ RESPONSE
 ```
 This user doesn't need to be verified. 
 
+* Login user
 
 POST http://127.0.0.1:5000/api/users/login
 
@@ -220,6 +223,7 @@ REQUEST
 }
 ```
 
+You can use username or email; the password is required. The user needs to be verified.
 
 RESPONSE
 ```json
@@ -228,7 +232,7 @@ RESPONSE
 }
 
 ```
-This user doesn't need to be verified. 
+
 
 For the rest endpoints in users you need to login in and the user's role has to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modify and add more users with different authorizations. 
 
