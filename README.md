@@ -142,7 +142,7 @@ src
    	 (venv) flask-rest-api/src $
     ```
 
-* Now before run, we have to make a changes in src/api/conifg/conifg.py in the class class DevelopmentConfig. In order to send the email for Auth 2 protocol for authentication, use your own credentials for this fields:
+* Now before run, we have to make a changes in src/api/conifg/conifg.py in the class DevelopmentConfig. In order to send the email for Auth 2 protocol for authentication, use your own credentials for these fields:
 
     ```
     MAIL_DEFAULT_SENDER= '<mail_sender>'
@@ -184,27 +184,54 @@ And repeat
 
 ## Usage
 ### Users endpoint
-POST http://127.0.0.1:5000/api/users
+
+First you need to create the first user, which will have the role of root. This endpoint is only possible for 1 time. 
+
+POST http://127.0.0.1:5000/api/users/root
 
 REQUEST
 ```json
 {
-	"name": "John John"
+	"username": "ringo",
+	"email": "ringo@gmail.com",
+	"password": "hello"
 }
 ```
+
+
 RESPONSE
 ```json
 {
-    "id": 1,
-    "name": "John John",
-    "todos": []
+"code": "success",
+}
+```
+This user doesn't need to be verified. 
+
+
+POST http://127.0.0.1:5000/api/users/login
+
+
+REQUEST
+```json
+{
+	"username": "ringo",
+	"email": "ringo@gmail.com",
+	"password": "hello"
 }
 ```
 
 
+RESPONSE
+```json
+{
+"code": "success",
+}
+
 ```
-until finished
-```
+This user doesn't need to be verified. 
+
+For the rest endpoints in users you need to login in and the user's role has to be at least admin. There is an order in roles, user = 1, admin = 2, and root = 3. This can be modify and add more users with different authorizations. 
+
 
 
 
