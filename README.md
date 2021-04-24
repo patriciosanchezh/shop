@@ -66,7 +66,7 @@ This project was made in macOS catalina, the commands for another OS can be diff
 
 * Create and activate your virtual environment in python3:
     ```
-        flask-rest-api $ python3 -m venv venv
+	flask-rest-api $ python3 -m venv venv
 	flask-rest-api $ source ./venv/bin/activate 
 	(venv)$
     ```
