@@ -48,20 +48,20 @@ This project was made in macOS catalina, the commands for another OS can be diff
 
 * Now, type the following command to create a new directory of name flask-rest-api and open it in your terminal.
     ```
-        $ mkdir flask-rest-api && cd flask-rest-api
+	$ mkdir flask-rest-api && cd flask-rest-api
     ```
 
 
 * Git clone this repo to your computer
     ```
-        flask-rest-api $ git clone https://github.com/patriciosanchezh/shop.git
+	flask-rest-api $ git clone https://github.com/patriciosanchezh/shop.git
     ```
 
 
 * Rename the directory shop to src. This is necessary in oder to run the test using library nose, if you know a better way, please let me know.
 
     ```
-        $ mv shop src
+	$ mv shop src
     ```
 
 * Create and activate your virtual environment in python3:
@@ -129,13 +129,13 @@ The endpoints are defined in routes. The models which defined users and customer
 * Before Running enter to src.
 	
     ```
-         (venv) flask-rest-api $ cd src
+	(venv) flask-rest-api $ cd src
     ```
 
 * It must looks like this
 
     ```
-   	 (venv) flask-rest-api/src $
+	(venv) flask-rest-api/src $
     ```
 
 * Now before running, you have to make some changes in src/api/conifg/conifg.py in the class DevelopmentConfig. In order to send the email for Auth 2 protocol for authentication, use your own credentials for these fields:
@@ -603,7 +603,7 @@ DELETE http://127.0.0.1:5000/api/customers/1
 * In order to run the tests for users:
 
 ```
-    (venv) flask-rest-api/src $ nosetests api/tests/test_users.py
+	(venv) flask-rest-api/src $ nosetests api/tests/test_users.py
 ```
 
 It will run 17 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_users.py to get more details. 
@@ -616,7 +616,7 @@ It will run 17 tests, with different configurations, simulating all the function
 In order to run the test for customers:
    
 ```
-    (venv) flask-rest-api/src $ nosetests api/tests/test_customers.py
+	(venv) flask-rest-api/src $ nosetests api/tests/test_customers.py
 ```
 
 It will  run 9 tests, with different configurations, simulating all the functions, with authorization or not. See src/api/test/test_customers.py to get more details. 
